@@ -1,0 +1,35 @@
+#!/bin/bash
+# Job name
+#PBS -N matrix.pbs
+# Output files
+#PBS -o ./matrix_parallel.txt
+#PBS -e ./matrix_parallel.e
+# Queue name
+#PBS -q short_cpuQ
+# Set the maximum wall time
+#PBS -l walltime=0:60:00
+# Number of nodes, cpus, mpi processors and amount of memory
+#PBS -l select=1:ncpus=16:mem=128mb
+# Modules for Cpp
+module load gcc91
+g++() {
+    g++-9.1.0 "$@"
+}
+g++ --version
+
+# Select the working directory
+cd /home/francesco.nodari
+
+#compile before running
+g++ -o exeCpp matrix_main.cpp -fopenmp
+#run the project
+./exeCpp 4
+./exeCpp 5
+./exeCpp 6
+./exeCpp 7
+./exeCpp 8
+./exeCpp 9
+./exeCpp 10
+./exeCpp 11
+./exeCpp 12
+
